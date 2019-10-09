@@ -10,6 +10,7 @@
 %\pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage[utf8]{inputenc}
 
 % Setup appearance:
 % \usetheme{Darmstadt}
@@ -23,9 +24,8 @@
 \setbeamertemplate{navigation symbols}{}
 % Standard packages
 % \usepackage[english]{babel}
-% \usepackage[latin1]{inputenc}
 % \usepackage{times}
-% \usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{ulem}
 \usepackage{colortbl}
 \usepackage{verbatim}
@@ -91,28 +91,15 @@
 
 \author[Stojni\'c and Gatto]
 {
-  Robert~Stojni\'c \url{rs550@cam.ac.uk} \\
-  Laurent~Gatto \url{lg390@cam.ac.uk} \\
-  %Course website:\\
-  %\url{http://logic.sysbiol.cam.ac.uk/teaching/advancedR/}
+  Robert~Stojni\'c \\
+  Laurent~Gatto \\
 }
 
-\institute[CSBC]
-{
-%   \inst{1}%
-  University of Cambridge \\
-  \url{DataProgrammers.net}
-}
+\date{ \today }
 
-\date[15-16/01/2015]
-{
-  15 - 16 January 2015
-}
 
-\pgfdeclareimage[height=.7cm]{uc-logo}{./Figures/uc-logo}
-\pgfdeclareimage[height=.7cm]{ebi-logo}{./Figures/EMBLEBIlogo}
 \pgfdeclareimage[width=5.5cm]{uml-diagram}{./Figures/uml-diagram}
-%% \logo{\pgfuseimage{uc-logo}}
+
 
 
 \AtBeginSection[] % Do nothing for \section*
@@ -313,7 +300,7 @@ No man pages found in package  ‘myRpackage’
 \begin{block}{Use package}
 	We can verify the new package is now available (although still not fully functional!) from R:
 \end{block}
-<<minpkg3,echo=TRUE>>=
+<<minpkg3, echo=TRUE, eval = FALSE>>=
 library("myRpackage")
 
 readFasta("aDnaSeq.fasta")
