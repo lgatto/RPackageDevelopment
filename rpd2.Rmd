@@ -404,7 +404,7 @@ documentation (that part is handled by the `rd` roclet, set with
 
 **Tip**: roxygen now also has [supports for
 markdown](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html)
-format: once can use `\`foo()\`` instead of `\\code{foo()`.
+format: once can use `` `foo()` `` instead of `\code{foo()}`.
 
 
 ### Vignettes
