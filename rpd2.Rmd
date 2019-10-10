@@ -452,9 +452,9 @@ have to add these dependencies in the `Suggests` field and specify
 
 * `.Rbuildignore` with a list of files/dirs to ignore when
   building. For example the `.Rproj` file.
-* `.Rinstignore`with a list of files/dirs to ignore when installing.
+* `.Rinstignore` with a list of files/dirs to ignore when installing.
 * `CITATION` file (see `citation()` function)
-* `README.Rmd`/`README.md` files if you use github.
+* `README.Rmd`/`README.md` files if you use github (see also tip above).
 
 ## Distributing packages
 
@@ -484,3 +484,8 @@ have to add these dependencies in the `Suggests` field and specify
   on github publicly before acceptance. A svn (git very soon) account
   will then be created. Package will be installable with
   `biocLite("myPackage")`.
+
+## Package webpage
+
+The [pkgdown](https://pkgdown.r-lib.org/index.html) makes creation of
+package webpages straighforward. Highly recommended!
