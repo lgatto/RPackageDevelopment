@@ -149,10 +149,10 @@ Author: Who wrote it ## *
 Maintainer: Who to complain to <yourfault@somewhere.net> ## *
 Description: More about what it does (maybe more than one line) ## *
 License: What license is it under? ## *
-Depends: methods, Biostrings ## for e.g.
-Imports: evd ## for e.g.
-Suggests: BSgenome.Hsapiens.UCSC.hg19 ## for e.g.
-Collate: 'DataClasses.R' 'read.R' ## for e.g.
+Depends: methods, Biostrings ## for ex
+Imports: evd ## for ex
+Suggests: BSgenome.Hsapiens.UCSC.hg19 ## for ex
+Collate: 'DataClasses.R' 'read.R' ## for ex
 ```
 
 Package dependencies:
@@ -167,8 +167,24 @@ Package dependencies:
 * **Collate** Controls the collation order for the R code files in a
   package. If filed is present, all source files must be listed.
 
- Packages are attached to the search path with \Rfunction{library} or \Rfunction{require}. 
- 
+Packages are attached to the search path with `library()` or
+`require()`.
+
+**Tip** In your scripts, always use `library()` rather than
+`require()`. The former will stop immediately with an error in case of
+a missing package. The latter will only return a warning and will lead
+to issues later on. `require()` is generally used inside functions
+with an `if` condition
+
+```{r}
+try(library("not_a_package"))
+require("not_a_package")
+if (!require("not_a_package")) {
+    message("Package not available")
+    ## possibly do something here
+    stop("Evacuate ship!")
+}
+```
 
 * **Attach** When a package is attached, then all of its dependencies
   (see `Depends` field in its `DESCRIPTION` file) are also
@@ -194,6 +210,9 @@ importFrom(foo, f, g) ## imports f and g from foo
 
 It is possible to explicitely use symbol `s` from package `foo` with
 `foo::s` or `foo:::s` if `s` is not exported.
+
+The `roxygen2` package (see below) can also be used to manage the
+namespace.
 
 ## R code
 
@@ -359,7 +378,7 @@ their documentation on top of their functions:
 #' f
 #' aa <- readFasta(f)
 #' aa
-#' @author Laurent Gatto \email{lg390@@cam.ac.uk}
+#' @author Laurent Gatto \email{laurent.gatto@@uclouvain.be}
 #' @export
 readFasta <- function(infile){
   lines <- readLines(infile)
@@ -383,7 +402,8 @@ documentation (that part is handled by the `rd` roclet, set with
 `roclet = "rd"`). It can also manage your `NAMESPACE` file and
 `Collate` field.
 
-Note: recently, support for markdown format has been added to roxygen.
+**Tip**: roxygen now also supports for markdown format - see 
+
 
 ### Vignettes
 

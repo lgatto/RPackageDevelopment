@@ -39,6 +39,13 @@ Thus a library is a directory containing installed packages.
 
 ```r
 library("devtools")
+```
+
+```
+## Loading required package: usethis
+```
+
+```r
 library("roxygen2")
 ```
 
@@ -47,7 +54,7 @@ library("roxygen2")
 
 Basic workflow
 
-1. Prepare R code
+1. Prepare R code (see tip below)
 2. Create package directory: `mypackage`
 3. **Build** the package tarball
 4. **Check** the package
@@ -60,6 +67,14 @@ Also
 - Vignettes
 - Testing packages
 - Compiled code
+
+
+**Tip**: do not wait until there is too much code to write a
+package. The ideal project starts with planning, and not with a dive
+straight into coding. In the frame of this course, this translates
+into the creating of a package that will be, as the project evolves,
+be populated with new functions, classes, methods, data, ... and their
+documentation.
 
 ## Preparing R code
 
@@ -74,7 +89,8 @@ fn <- function()
 We can use
 
 - `package.skeleton("myRpackage", list = "fn")`
-- `devtools::create("myRpackage")` also create an `.Rproj` file.
+- `devtools::create("myRpackage")`: creates a fully functional package
+  with an an `.Rproj` file.
 - Use the RStudio wizard: `New Project > New Directory > R Package`
 
 ```
@@ -90,6 +106,14 @@ myRpackage/
 This is the *source package*. From this, we need to create the
 *package tarball* (or *package bundle*), i.e. a compressed archive of
 the source. We can also create *binary packages* for Windows and Mac.
+
+**Tip**: While not directly related to package development, it is also
+useful to already think about collaboration and dissemination at this
+stage. A good solution is to use Github, Bitbucket, Gitlab or similar
+online code versioning infrastructures. Such an online repository
+(that can be private in a first instance, if necessary) will enable
+collaboration (through issues) and tracking (code versioning) and,
+once public, installation using `devtools::install()`.
 
 ## Package developement cycle
 
@@ -117,6 +141,9 @@ A shortcut when developing:
 
 * `devtools::load_all()`
 
+that will load/update all the code in the R package into the package's
+namespace (environment).
+
 ## Package metadata
 
 The `DESCRIPTION` file
@@ -131,10 +158,10 @@ Author: Who wrote it ## *
 Maintainer: Who to complain to <yourfault@somewhere.net> ## *
 Description: More about what it does (maybe more than one line) ## *
 License: What license is it under? ## *
-Depends: methods, Biostrings ## for e.g.
-Imports: evd ## for e.g.
-Suggests: BSgenome.Hsapiens.UCSC.hg19 ## for e.g.
-Collate: 'DataClasses.R' 'read.R' ## for e.g.
+Depends: methods, Biostrings ## for ex
+Imports: evd ## for ex
+Suggests: BSgenome.Hsapiens.UCSC.hg19 ## for ex
+Collate: 'DataClasses.R' 'read.R' ## for ex
 ```
 
 Package dependencies:
@@ -149,8 +176,62 @@ Package dependencies:
 * **Collate** Controls the collation order for the R code files in a
   package. If filed is present, all source files must be listed.
 
- Packages are attached to the search path with \Rfunction{library} or \Rfunction{require}. 
- 
+Packages are attached to the search path with `library()` or
+`require()`.
+
+**Tip** In your scripts, always use `library()` rather than
+`require()`. The former will stop immediately with an error in case of
+a missing package. The latter will only return a warning and will lead
+to issues later on. `require()` is generally used inside functions
+with an `if` condition
+
+
+```r
+try(library("not_a_package"))
+```
+
+```
+## Error in library("not_a_package") : 
+##   there is no package called 'not_a_package'
+```
+
+```r
+require("not_a_package")
+```
+
+```
+## Loading required package: not_a_package
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'not_a_package'
+```
+
+```r
+if (!require("not_a_package")) {
+    message("Package not available")
+    ## possibly do something here
+    stop("Evacuate ship!")
+}
+```
+
+```
+## Loading required package: not_a_package
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'not_a_package'
+```
+
+```
+## Package not available
+```
+
+```
+## Error in eval(expr, envir, enclos): Evacuate ship!
+```
 
 * **Attach** When a package is attached, then all of its dependencies
   (see `Depends` field in its `DESCRIPTION` file) are also
@@ -176,6 +257,9 @@ importFrom(foo, f, g) ## imports f and g from foo
 
 It is possible to explicitely use symbol `s` from package `foo` with
 `foo::s` or `foo:::s` if `s` is not exported.
+
+The `roxygen2` package (see below) can also be used to manage the
+namespace.
 
 ## R code
 
@@ -342,7 +426,7 @@ their documentation on top of their functions:
 #' f
 #' aa <- readFasta(f)
 #' aa
-#' @author Laurent Gatto \email{lg390@@cam.ac.uk}
+#' @author Laurent Gatto \email{laurent.gatto@@uclouvain.be}
 #' @export
 readFasta <- function(infile){
   lines <- readLines(infile)
