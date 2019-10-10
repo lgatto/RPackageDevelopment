@@ -307,6 +307,13 @@ up (just before the package is detached).  See `help(".onLoad"))`,
   [rccpp](https://github.com/lgatto/rccpp/) material)
 * **demo** for demo code (see `?demo`)
 
+**Tip** While nothing prevents from creating the directories above
+manually (when they are needed), it is also possible to use the
+[usethis](https://usethis.r-lib.org/index.html) a workflow package,
+that automates some of the repetitive tasks that arise during project
+setup and development of R packages (and non-package projects).
+
+
 ## Documentation
 
 ## Manual pages
