@@ -7,10 +7,10 @@ tractable way. Even if the intend is not to disseminate your code,
 packaging it is worth it. Packages provide a mechanism for loading
 optional code and attached documentation as needed.
 
-- logically group your own functions 
+- logically group your own functions
 - keep code and documentation together and consistent
 - keep code and data together
-- keep track of changes in code 
+- keep track of changes in code
 - summarise all packages used for a analysis (see `sessionInfo()`)
 - make a reproducible research compendium (container for code, text,
   data as a means for distributing, managing and updating)
@@ -20,15 +20,15 @@ optional code and attached documentation as needed.
 ### References
 
 - [R packages](http://r-pkgs.had.co.nz/), by Hadley Wickham
-- R Installation and Administration [R-admin], R Core team 
-- Writing R Extensions [R-ext], R Core team 
+- R Installation and Administration [R-admin], R Core team
+- Writing R Extensions [R-ext], R Core team
 
 > Use `help.start()` to access them from your local installation, or
 > http://cran.r-project.org/manuals.html from the web.
 
 ### Terminology
 
-A **package** is loaded from a **library** by the function `library()`. 
+A **package** is loaded from a **library** by the function `library()`.
 Thus a library is a directory containing installed packages.
 
 > Calling `library("foo", lib.loc = "/path/to/bar")` loads the package
@@ -62,7 +62,7 @@ Basic workflow
 
 Step 2 is done only once. Package developement cycles through 3 - 5.
 
-Also 
+Also
 - Writing package documentation
 - Vignettes
 - Testing packages
@@ -80,8 +80,8 @@ documentation.
 
 
 ```r
-fn <- function() 
-    message("I love R packages")    
+fn <- function()
+    message("I love R packages")
 ```
 
 ## Package layout
@@ -132,7 +132,7 @@ Using RStudio useful keyboard shortcuts for package authoring:
 * Test Package: `Ctrl + Shift + T`
 
 Using devtools:
-* `devtools::build()` 
+* `devtools::build()`
 * `devtools::build(binary = TRUE)`
 * `devtools::check()`
 * `devtools::install()`
@@ -150,10 +150,10 @@ The `DESCRIPTION` file
 
 ```
 Package: myRpackage ## mandatory (*)
-Type: Package ## optional, 'Package' is default type 
+Type: Package ## optional, 'Package' is default type
 Title: What the package does (short line) ## *
 Version: 1.0 ##  *
-Date: 2013-05-10 ## release date of the current version 
+Date: 2013-05-10 ## release date of the current version
 Author: Who wrote it ## *
 Maintainer: Who to complain to <yourfault@somewhere.net> ## *
 Description: More about what it does (maybe more than one line) ## *
@@ -237,7 +237,7 @@ if (!require("not_a_package")) {
   (see `Depends` field in its `DESCRIPTION` file) are also
   attached. Such packages are part of the evaluation environment and
   will be searched.
-	  
+
 * **Load** One can also use the `Imports` field in the `NAMESPACE`
   file. Imported packages are loaded but are not attached: they do not
   appear on the search path and are available only to the package that
@@ -249,7 +249,7 @@ Restricts the symbols that are exported and imports functionality from
 other packages.  Only the exported symbols will have to be documented.
 
 ```
-export(f, g) ## exports f and g 
+export(f, g) ## exports f and g
 exportPattern("^[^\\.]")
 import(foo) ## imports all symbols from package foo
 importFrom(foo, f, g) ## imports f and g from foo
@@ -266,7 +266,7 @@ namespace.
 Contains `source()`able R source code to be installed. Files must
 start with an ASCII (lower or upper case) letter or digit and have one
 of the extensions `.R`, `.S`, `.q`, `.r`, or `.s` (use `.R` or
-`.r`). 
+`.r`).
 
 * General style guidelines and best practice apply.
 * Any number of files in `R`.
@@ -310,7 +310,7 @@ up (just before the package is detached).  See `help(".onLoad"))`,
 ## Manual pages
 
 Package functions, datasets, methods and classes are documented in
-`Rd`, a LaTeX-like format. 
+`Rd`, a LaTeX-like format.
 
 ```
 % File src/library/base/man/load.Rd
@@ -412,11 +412,11 @@ their documentation on top of their functions:
 
 ```
 #' Reads sequences data in fasta and create \code{DnaSeq}
-#' and \code{RnaSeq} instances. 
+#' and \code{RnaSeq} instances.
 #'
 #' This funtion reads DNA and RNA fasta files and generates
 #' valid \code{"DnaSeq"} and \code{"RnaSeq"} instances.
-#' 
+#'
 #' @title Read fasta files.
 #' @param infile  the name of the fasta file which the data are to be read from.
 #' @return an instance of \code{DnaSeq} or \code{RnaSeq}.
@@ -450,7 +450,10 @@ documentation (that part is handled by the `rd` roclet, set with
 `roclet = "rd"`). It can also manage your `NAMESPACE` file and
 `Collate` field.
 
-Note: recently, support for markdown format has been added to roxygen.
+**Tip**: roxygen now also has [supports for
+markdown](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html)
+format: once can use `\`foo()\`` instead of `\\code{foo()`.
+
 
 ### Vignettes
 
@@ -462,7 +465,7 @@ Vignettes can be written in Sweave format (`.Rnw` extension),
 supporting R code chunks in LaTeX documents, or R markdown formart
 (`.Rmd` extension) for R code and markdown.
 
-The source document (`.Rnw` or `.Rmd`) can be 
+The source document (`.Rnw` or `.Rmd`) can be
 
 * weaved into `tex` or `md` files respectively
 * and converted into `pdf` or `html` (`Rnw` to `pdf` only, `Rmd` to
@@ -495,7 +498,7 @@ have to add these dependencies in the `Suggests` field and specify
   `ftp://cran.R-project.org/incoming` or using
   `http://CRAN.R-project.org/submit.html`. Your package will be
   installable with `install.packages("myRpackage")`.
-		
+
 * **R-forge** Log in, register a project and wait for acceptance. Then
   commit you code to the svn repository. Your package will be
   installable with `install.packages` using
@@ -515,5 +518,3 @@ have to add these dependencies in the `Suggests` field and specify
   on github publicly before acceptance. A svn (git very soon) account
   will then be created. Package will be installable with
   `biocLite("myPackage")`.
-
-
