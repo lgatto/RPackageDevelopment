@@ -104,7 +104,9 @@ stage. A good solution is to use Github, Bitbucket, Gitlab or similar
 online code versioning infrastructures. Such an online repository
 (that can be private in a first instance, if necessary) will enable
 collaboration (through issues) and tracking (code versioning) and,
-once public, installation using `devtools::install()`.
+once public, installation using `devtools::install()`. When using a
+repository, it is also very useful to add a `README.md` file that will
+be used as default landing page for public repositories.
 
 ## Package developement cycle
 
@@ -402,9 +404,14 @@ documentation (that part is handled by the `rd` roclet, set with
 `roclet = "rd"`). It can also manage your `NAMESPACE` file and
 `Collate` field.
 
+**Tip** The [Rd2roxygen](https://yihui.name/rd2roxygen/) package can
+help to switch from existing Rd manual pages to roxygen.
+
 **Tip**: roxygen now also has [supports for
 markdown](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html)
-format: once can use `` `foo()` `` instead of `\code{foo()}`.
+format: once can use `` `foo()` `` instead of `\code{foo()}`. The
+[roxygen2md](https://roxygen2md.r-lib.org/) package can help to switch
+to markdown syntax for existing roxygen headers.
 
 
 ### Vignettes
