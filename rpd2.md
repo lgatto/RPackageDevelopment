@@ -516,7 +516,7 @@ have to add these dependencies in the `Suggests` field and specify
 * **R-forge** Log in, register a project and wait for acceptance. Then
   commit you code to the svn repository. Your package will be
   installable with `install.packages` using
-  `repos="http://R-Forge.R-project.org"`.
+  `repos="http://R-Forge.R-project.org"`. (not recommended)
 
 
 * **GitHub** (and **Bitbucket**) Great for development and promoting
