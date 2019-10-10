@@ -46,7 +46,7 @@ library("roxygen2")
 
 Basic workflow
 
-1. Prepare R code
+1. Prepare R code (see tip below)
 2. Create package directory: `mypackage`
 3. **Build** the package tarball
 4. **Check** the package
@@ -60,6 +60,14 @@ Also
 - Testing packages
 - Compiled code
 
+
+**Tip**: do not wait until there is too much code to write a
+package. The ideal project starts with planning, and not with a dive
+straight into coding. In the frame of this course, this translates
+into the creating of a package that will be, as the project evolves,
+be populated with new functions, classes, methods, data, ... and their
+documentation.
+
 ## Preparing R code
 
 ```{r}
@@ -72,7 +80,8 @@ fn <- function()
 We can use
 
 - `package.skeleton("myRpackage", list = "fn")`
-- `devtools::create("myRpackage")` also create an `.Rproj` file.
+- `devtools::create("myRpackage")`: creates a fully functional package
+  with an an `.Rproj` file.
 - Use the RStudio wizard: `New Project > New Directory > R Package`
 
 ```
@@ -88,6 +97,14 @@ myRpackage/
 This is the *source package*. From this, we need to create the
 *package tarball* (or *package bundle*), i.e. a compressed archive of
 the source. We can also create *binary packages* for Windows and Mac.
+
+**Tip**: While not directly related to package development, it is also
+useful to already think about collaboration and dissemination at this
+stage. A good solution is to use Github, Bitbucket, Gitlab or similar
+online code versioning infrastructures. Such an online repository
+(that can be private in a first instance, if necessary) will enable
+collaboration (through issues) and tracking (code versioning) and,
+once public, installation using `devtools::install()`.
 
 ## Package developement cycle
 
@@ -114,6 +131,9 @@ Using devtools:
 A shortcut when developing:
 
 * `devtools::load_all()`
+
+that will load/update all the code in the R package into the package's
+namespace (environment).
 
 ## Package metadata
 
